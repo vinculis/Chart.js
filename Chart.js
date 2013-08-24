@@ -852,7 +852,7 @@ window.Chart = function(context){
 			}
 		}
 
-		if (window.Touch) {
+		if (is_touch_device()) {
 			context.canvas.ontouchstart = function(e) {
 				e.offsetX = e.targetTouches[0].clientX - position.x;
 				e.offsetY = e.targetTouches[0].clientY - position.y;
@@ -1508,4 +1508,9 @@ window.Chart = function(context){
 	    // Provide some basic currying to the user
 	    return data ? fn( data ) : fn;
 	  };
+
+	function is_touch_device() {
+	  return !!('ontouchstart' in window) // works on most browsers 
+	      || !!('onmsgesturechange' in window); // works on ie10
+	};	  
 }
